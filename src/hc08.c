@@ -66,7 +66,6 @@ const struct opinfo* hc_curr_opinfo(struct hc_state *st)
 {
     int page = hc_op_page(st);
     assert(page < pages_size);
-    st->offset += pages[page].prebyte_cnt;
     assert(st->offset < MAX_INSN_LEN);
 
     uint16_t *pc = &st->regs.PC.word;
