@@ -136,7 +136,7 @@ int _handle_op_AND_BIT(struct hc_state *state, const struct opinfo *info)
 
     state->regs.CCR.bits.V = 0;
     state->regs.CCR.bits.N = CHECK_MSB(state->regs.A);
-    state->regs.CCR.bits.Z = state->regs.A == 0;
+    state->regs.CCR.bits.Z = temp == 0;
 
     return rc;
 }
