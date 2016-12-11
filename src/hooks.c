@@ -98,6 +98,9 @@ int hc_hook_install(struct sim_state *state, void *userdata,
 /// @todo find a way to find hooks more efficiently than linear search
 static int _apply_hooks(struct hook_state *hs, enum hook_when when, struct sim_state *state)
 {
+    if(!hs){
+        return -1;
+    }
     for (unsigned i = 0; i < hs->hook_index; i++) {
         struct hook_entry *he = &hs->hooks[i];
         enum op op = hc_curr_op(&state->hc_state);
