@@ -244,6 +244,8 @@ int _handle_op_BRANCHES(struct hc_state *state, const struct opinfo *info)
         case OP_BRSET0: case OP_BRSET1: case OP_BRSET2: case OP_BRSET3:
         case OP_BRSET4: case OP_BRSET5: case OP_BRSET6: case OP_BRSET7:
             cond ^= !!(m & (1 << ((op - OP_BRSET0) >> 1)));
+            // decode branch address after testing operand
+            state->offset++;
             break;
 
         default: break;
