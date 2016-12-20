@@ -202,7 +202,7 @@ int _handle_op_BRANCHES(struct hc_state *state, const struct opinfo *info)
 
     addr_t addr;
     _decode_addrs(state, info, &addr, NULL);
-    bool m = state->mem[addr];
+    uint8_t m = state->mem[addr];
 
     bool c = state->regs.CCR.bits.C;
     bool h = state->regs.CCR.bits.H;
