@@ -668,8 +668,11 @@ int _handle_op_LSL_ROL(struct hc_state *state, const struct opinfo *info)
     enum op op = info->type;
     uint8_t *r;
     switch (op) {
+        case OP_ROL :
         case OP_LSL : r = &state->mem[addr];        break;
+        case OP_ROLA:
         case OP_LSLA: r = &state->regs.A;           break;
+        case OP_ROLX:
         case OP_LSLX: r = &state->regs.HX.bytes.X;  break;
         default: hc_error("Invalid op");
     }
