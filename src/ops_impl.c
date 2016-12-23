@@ -275,11 +275,16 @@ int _handle_op_BSET_BCLR(struct hc_state *state, const struct opinfo *info)
     _decode_addrs(state, info, &addr, NULL);
 
     enum op op = info->type;
-    uint8_t mask = 1 << ((op - OP_BRSET0) >> 1);
+    uint8_t mask;
 
     // BCLRX opcodes are odd, BSETX are even
-    if (op & 1) state->mem[addr] &= ~mask;
-    else        state->mem[addr] |=  mask;
+    if(info->opcode & 1){
+        mask = 1 << ((op - OP_BCLR0));
+        state->mem[addr] &= ~mask;
+    } else {
+        mask = 1 << ((op - OP_BSET0));
+        state->mem[addr] |=  mask;
+    }
 
     return rc;
 }
