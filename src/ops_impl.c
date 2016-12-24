@@ -240,13 +240,15 @@ int _handle_op_BRANCHES(struct hc_state *state, const struct opinfo *info)
 
         case OP_BRCLR0: case OP_BRCLR1: case OP_BRCLR2: case OP_BRCLR3:
         case OP_BRCLR4: case OP_BRCLR5: case OP_BRCLR6: case OP_BRCLR7:
-            cond ^= 1;
             cond ^= !!(m & (1 << ((op - OP_BRCLR0))));
+            state->regs.CCR.bits.C = cond;
             state->offset++;
+            cond ^= 1;
             break;
         case OP_BRSET0: case OP_BRSET1: case OP_BRSET2: case OP_BRSET3:
         case OP_BRSET4: case OP_BRSET5: case OP_BRSET6: case OP_BRSET7:
             cond ^= !!(m & (1 << ((op - OP_BRSET0))));
+            state->regs.CCR.bits.C = cond;
             state->offset++;
             break;
 
